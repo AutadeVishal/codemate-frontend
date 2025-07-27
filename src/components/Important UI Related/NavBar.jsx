@@ -1,10 +1,17 @@
+import { useSelector } from "react-redux";
+
+
+
 const NavBar=()=>{
+  const user=useSelector(state=>state.user);
+  console.log("User found in Navbar is below")
+  console.log(user);
   return(
     <div className="navbar bg-base-100 shadow-sm">
   <div className="flex-1">
     <a className="btn btn-ghost text-xl">Code Mate</a>
   </div>
-  <div className="flex gap-2">
+ { user && <div className="flex gap-2">
    
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -27,7 +34,7 @@ const NavBar=()=>{
         <li><a>Logout</a></li>
       </ul>
     </div>
-  </div>
+  </div>}
 </div>)
 }
 
