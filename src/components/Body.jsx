@@ -1,38 +1,44 @@
 import React from 'react'
 import NavBar from "./Important UI Related/NavBar"
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Footer from './Important UI Related/Footer'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { BASE_URL } from '../utils/constants'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../utils/userSlice'
+import { useSelector } from 'react-redux'
 
 const Body = () => {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userData = useSelector(state => state.user);
   const fetchUser = async () => {
-    try { 
+    try {
       const res = await axios.get(`${BASE_URL}/profile/view`, {
         withCredentials: true,
-        secure:false,
-        headers:{
-          token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODg1ODU1YmI5NDI2ZjJmN2E1Y2Q5NzUiLCJpYXQiOjE3NTM2OTM3MTgsImV4cCI6MTc1MzY5NzMxOH0.gL3hGp5kJX598U6u8wQgF_MMCSxUAbc5fqOR_cDwvNw",
-        }
-       
+        secure: false,
+
       })
       dispatch(setUser(res.data));
-      console.log(res.data)
-    }catch(err){
-      console.log("Error In Fetching User from Body Component")
-      console.log(err)
+      console.log("User Fetched Successfully by Body Component")
+    } catch (err) {
+      if (err.response.status === 401) {
+        return navigate("/login");
+      }
+      navigate("/error");
+      console.log("Error In Fetching User from Body Component :", err)
     }
 
   }
 
 
   useEffect(() => {
-    fetchUser();
-  },[])
+    if (!userData) {
+      fetchUser();
+    }
+
+  }, [])
   return (
     <div>
       <NavBar />
