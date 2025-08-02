@@ -18,6 +18,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/error" element={<ErrorPage />} />
+              <Route path="*" element={<ErrorPage />} /> {/* Catch-all route for 404 */}
             </Route>
           </Routes>
         </BrowserRouter>

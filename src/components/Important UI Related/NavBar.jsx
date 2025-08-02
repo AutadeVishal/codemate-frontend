@@ -5,6 +5,7 @@ import { BASE_URL } from "../../utils/constants";
 import { removeUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import ErrorPage from "../ErrorPage";
+import { useEffect } from "react";
 
 
 
@@ -29,6 +30,9 @@ const NavBar = () => {
       navigate("/error");
     }
   }
+  useEffect(()=>{
+    if(!user) navigate('/login')
+  },[]);
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">

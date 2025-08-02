@@ -13,39 +13,49 @@ const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector(state => state.user);
+  const [loading, setLoading] = React.useState(true);
+
   const fetchUser = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/profile/view`, {
         withCredentials: true,
-        secure: false,
-
-      })
+      });
       dispatch(setUser(res.data));
-      console.log("User Fetched Successfully by Body Component")
+      console.log("User Fetched Successfully by Body Component");
     } catch (err) {
-      if (err.response.status === 401) {
-        return navigate("/login");
-      }
-      navigate("/error");
-      console.log("Error In Fetching User from Body Component :", err)
+      console.log("Error In Fetching User from Body Component :", err);
+
+      navigate('/login')
+
+    } finally {
+      setLoading(false);
     }
-
-  }
-
+  };
 
   useEffect(() => {
     if (!userData) {
       fetchUser();
+    } else {
+      setLoading(false); // User already in Redux
     }
+  }, []);
 
-  }, [])
+  if (loading) {
+    return (
+      <div className="h-screen w-screen flex justify-center items-center">
+        <p className="text-xl font-bold">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <NavBar />
       <Outlet />
       <Footer />
     </div>
-  )
-}
+  );
+};
+
 
 export default Body
