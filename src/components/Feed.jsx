@@ -30,7 +30,7 @@ const Feed = () => {
   
     }, []);
   return (
-    <div className='flex flex-col justify-center items-center h-screen'>
+    <div className='flex flex-col justify-center items-center'>
     { feedData.map((userData)=>{
       return <FeedCard key={userData._id} userInfo={userData}/>
     })

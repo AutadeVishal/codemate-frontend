@@ -18,8 +18,8 @@ const FeedCard = ({ userInfo }) => {
                     ))}
                 </div>
                 <div className="flex gap-5 ">
-                    <button className="btn btn-primary">Ignore</button>
-                     <button className="btn btn-primary">Interested</button>
+                    <button className="btn btn-primary">Ignore</button> {/* Changed to btn-primary */}
+                     <button className="btn bg-[#F07171]">Interested</button> {/* Fixed background color */}
                 </div>
             </div>
         </div>
