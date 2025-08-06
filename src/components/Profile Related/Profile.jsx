@@ -50,7 +50,7 @@ const Profile = () => {
         withCredentials: true,
       });
       
-      dispatch(setUser(res.data));
+      dispatch(setUser(res.data.data));
       setError(null);
       setIsChangingPassword(false);
       setNewPassword('');

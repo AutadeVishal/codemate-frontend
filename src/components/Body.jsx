@@ -20,8 +20,9 @@ const Body = () => {
       const res = await axios.get(`${BASE_URL}/profile/view`, {
         withCredentials: true,
       });
-      dispatch(setUser(res.data));
-      console.log("User Fetched Successfully by Body Component");
+      dispatch(setUser(res.data.data));
+      console.log("User Fetched Successfully by Body Component :");
+      console.log(res.data.data)
     } catch (err) {
       console.log("Error In Fetching User from Body Component :", err);
 

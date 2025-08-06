@@ -17,7 +17,7 @@ const Login = () => {
       const res = await axios.post(`${BASE_URL}/auth/login`, { email, password }, {
         withCredentials: true,//for cookies
       });
-      const user = res.data;
+      const user = res.data.data;
       
       dispatch(setUser(user));
       return navigate('/');
