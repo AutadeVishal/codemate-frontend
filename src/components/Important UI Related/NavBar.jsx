@@ -4,7 +4,6 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import { removeUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router-dom";
-import ErrorPage from "../ErrorPage";
 import { useEffect } from "react";
 
 
@@ -17,7 +16,7 @@ const NavBar = () => {
   console.log(user);
   const handleLogout = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/auth/logout`, {}, {
+      await axios.post(`${BASE_URL}/auth/logout`, {}, {
         withCredentials: true,
       });
       dispatch(removeUser());

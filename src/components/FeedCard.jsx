@@ -1,7 +1,17 @@
-
+import { useEffect } from "react";
 
 const FeedCard = ({ userInfo }) => {
     const {firstName,lastName,skills,about,photoURL}=userInfo;
+
+    useEffect(()=>{
+        if(!userInfo){
+            return <h1>Loading</h1>
+        }
+
+    },[userInfo])
+    if(!userInfo) return (
+        <h1>Loading </h1>
+    );
     return (
         <div className="card bg-base-300 w-80 shadow-sm h-[450px] flex flex-col">
             <figure>
@@ -15,7 +25,7 @@ const FeedCard = ({ userInfo }) => {
                 <h2 className="card-title">{firstName} {lastName}</h2>
                 <p>{about}</p>
                 <div className="flex flex-wrap justify-center gap-2 mt-2">
-                    {skills.map((skill, index) => (
+                    {skills?.map((skill, index) => (
                         <span key={index} className="badge badge-outline badge-primary">{skill}</span>
                     ))}
                 </div>

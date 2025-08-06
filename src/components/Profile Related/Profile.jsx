@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/constants';
@@ -8,6 +8,7 @@ import FeedCard from '../feedCard';
 const Profile = () => {
   const userInfo = useSelector(state => state.user);
   const { firstName, lastName, skills, about, photoURL, email } = userInfo;
+  const loading = !userInfo;
   
   //  editable fields
   const [emailState, setEmailState] = useState(email);
@@ -60,6 +61,13 @@ const Profile = () => {
     }
   };
 
+
+  useEffect(()=>{
+    if(!userInfo){
+      return <h1>Loading</h1>
+    }
+
+  },[userInfo])
   return (
     <div className="flex gap-10 justify-center">
       <div className="flex flex-row gap-10 justify-center mt-10">
@@ -108,7 +116,7 @@ const Profile = () => {
           <input type="text" value={lastNameState} onChange={(e) => setLastNameState(e.target.value)} className="input input-bordered" />
 
           <label className="label">Skills</label>
-          <input type="text" value={skillsState.join(', ')} onChange={(e) => setSkillsState(e.target.value.split(',').map(skill => skill.trim()))} className="input input-bordered" placeholder="e.g., React, Node.js, MongoDB" />
+          <input type="text" value={skillsState?.join(', ')} onChange={(e) => setSkillsState(e.target.value.split(',').map(skill => skill.trim()))} className="input input-bordered" placeholder="e.g., React, Node.js, MongoDB" />
 
           <label className="label">Photo URL</label>
           <input type="text" value={photoURLState} onChange={(e) => setPhotoURLState(e.target.value)} className="input input-bordered" />
