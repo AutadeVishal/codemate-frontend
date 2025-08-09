@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const Feed = () => {
   const feedData = useSelector(state => state.feed)
   const dispatch = useDispatch();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const getFeedData = async () => {
     try {
       const res = await axios(`${BASE_URL}/request/feed`, {
@@ -16,7 +16,7 @@ const Feed = () => {
       })
       const usersData = res.data.data;
       console.log(usersData)
-      if(usersData.length==0) return ;
+      if (usersData.length == 0) return;
       dispatch(setFeed(usersData))//as bckend has array of user as  data:[{user1data},{userndata}]
     }
     catch (err) {
@@ -24,19 +24,16 @@ const Feed = () => {
       navigate('/login')
     }
   }
-  
-    useEffect(() => {
-     if (feedData?.length === 0) getFeedData();
-  
-    }, []);
+
+  useEffect(() => {
+    if (feedData?.length === 0) getFeedData();
+
+  }, []);
   return (
-    <div className='grid grid-cols-4 gap-4 px-10 mt-10 justify-center items-center'>
-    {feedData.map((userData) => {
-      return <FeedCard key={userData._id} userInfo={userData}/>
-    })
-    
-    
-    }
+    <div className='flex flex-wrap gap-8 px-10 mt-10 justify-center items-center'>
+      {feedData.map((userData) => (
+        <FeedCard key={userData._id} userInfo={userData} />
+      ))}
     </div>
   )
 }

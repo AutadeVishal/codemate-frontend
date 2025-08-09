@@ -41,21 +41,27 @@ const Body = () => {
     }
   }, []);
 
-  if (loading) {
-    return (
-      <div className="h-screen w-screen flex justify-center items-center">
-        <p className="text-xl font-bold">Loading...</p>
-      </div>
-    );
-  }
-
+ if (loading) {
   return (
-    <div>
-      <NavBar />
-      <Outlet />
-      <Footer />
+    <div className="h-screen w-screen bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 flex justify-center items-center">
+      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 shadow-lg border border-white/20">
+        <p className="text-xl font-bold text-white">Loading...</p>
+      </div>
     </div>
   );
+}
+
+ return (
+  <div className="min-h-screen bg-gradient-to-br from-purple-700 via-indigo-600 to-blue-500 text-white">
+    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl shadow-md mx-4 my-6 p-4">
+      <NavBar />
+      <div className="my-8">
+        <Outlet />
+      </div>
+      <Footer />
+    </div>
+  </div>
+);
 };
 
 

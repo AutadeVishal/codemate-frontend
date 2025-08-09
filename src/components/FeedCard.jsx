@@ -1,43 +1,39 @@
 import { useEffect } from "react";
 
 const FeedCard = ({ userInfo }) => {
-    const {firstName,lastName,skills,about,photoURL}=userInfo;
+  const { firstName, lastName, skills, about, photoURL } = userInfo;
 
-    useEffect(()=>{
-        if(!userInfo){
-            return <h1>Loading</h1>
-        }
+  if (!userInfo) return <h1 className="text-white text-xl">Loading...</h1>;
 
-    },[userInfo])
-    if(!userInfo) return (
-        <h1>Loading </h1>
-    );
-    return (
-        <div className="card bg-base-300 w-80 shadow-sm h-[450px] flex flex-col">
-            <figure>
-                <img
-                className="rounded-2xl"
-                    src={photoURL || 'https://via.placeholder.com/150'}
-                    alt="User Profile"
-                     />
-            </figure>
-            <div className="card-body items-center text-center">
-                <h2 className="card-title">{firstName} {lastName}</h2>
-                <p>{about}</p>
-                <div className="flex flex-wrap justify-center gap-2 mt-2">
-                    {skills?.map((skill, index) => (
-                        <span key={index} className="badge badge-outline badge-primary">{skill}</span>
-                    ))}
-                </div>
-                <div className="flex gap-5 mt-auto">
-                    <button className="btn btn-primary">Ignore</button> 
-                     <button className="btn bg-[#F07171]">Interested</button>
-                </div>
-            </div>
+  return (
+    <div className="relative z-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl w-80 h-[480px] p-4 flex flex-col justify-between text-white transition-transform hover:scale-105 duration-300">
+      <figure className="mb-4 relative z-0">
+        <img
+          className="rounded-full w-24 h-24 object-cover mx-auto border border-white/30 shadow-sm z-[-10]"
+          src={photoURL || 'https://via.placeholder.com/150'}
+          alt="User Profile"
+        />
+      </figure>
+      <div className="text-center space-y-2">
+        <h2 className="text-xl font-semibold tracking-wide">{firstName} {lastName}</h2>
+        <p className="text-sm opacity-80">{about}</p>
+        <div className="flex flex-wrap justify-center gap-2 mt-2">
+          {skills?.map((skill, index) => (
+            <span
+              key={index}
+              className="px-3 py-1 text-xs rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"
+            >
+              {skill}
+            </span>
+          ))}
         </div>
-    )
-
-
-}
+      </div>
+      <div className="flex justify-center gap-4 mt-4">
+        <button className="px-4 py-2 text-sm text-white border border-white/30 rounded-full hover:bg-white/20">Ignore</button>
+        <button className="px-4 py-2 text-sm text-white bg-[#F07171] rounded-full hover:bg-[#e65c5c]">Interested</button>
+      </div>
+    </div>
+  );
+};
 
 export default FeedCard;
