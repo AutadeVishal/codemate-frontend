@@ -1,8 +1,26 @@
+
 import { useEffect } from "react";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../utils/feedSlice";
 
 const FeedCard = ({ userInfo }) => {
+  const dispatch=useDispatch();
   const { firstName, lastName, skills, about, photoURL } = userInfo;
+  const handleConnection=async (status,email)=>{
+    try{
+      const res=await axios.post(`${BASE_URL}/connection/request/send/${status}/${email}`,{},{
+        withCredentials:true,
+      })
+      dispatch(removeUser(userInfo._id))
+      console.log("User Sent Request",res.data)
 
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
   if (!userInfo) return <h1 className="text-white text-xl">Loading...</h1>;
 
   return (
@@ -29,8 +47,14 @@ const FeedCard = ({ userInfo }) => {
         </div>
       </div>
       <div className="flex justify-center gap-4 mt-4">
-        <button className="px-4 py-2 text-sm text-white border border-white/30 rounded-full hover:bg-white/20">Ignore</button>
-        <button className="px-4 py-2 text-sm text-white bg-[#F07171] rounded-full hover:bg-[#e65c5c]">Interested</button>
+        <button 
+        className="px-4 py-2 text-sm text-white border border-white/30 rounded-full hover:bg-white/20"
+        onClick={()=>handleConnection("ignored",userInfo.email)}
+       >Ignore</button>
+        <button 
+        className="px-4 py-2 text-sm text-white bg-[#F07171] rounded-full hover:bg-[#e65c5c]"
+        onClick={()=>handleConnection("interested",userInfo.email)}
+        >Interested</button>
       </div>
     </div>
   );

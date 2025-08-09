@@ -7,10 +7,14 @@ const feedSlice=createSlice({
         setFeed(state, action){
             return action.payload;
         },
+        removeUser:(state,action)=>{
+            const newArray=state.filter((user)=>user._id!=action.payload);
+            return newArray;
+        },
         removeFeed(state){
             return null;
         }
     }
 })
 export default feedSlice.reducer;//userSlice is const here in both 
-export const {setFeed,removeFeed}=feedSlice.actions;
+export const {setFeed,removeFeed,removeUser}=feedSlice.actions;
