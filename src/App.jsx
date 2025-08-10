@@ -6,8 +6,8 @@ import { Provider } from "react-redux"
 import appStore from "./utils/appStore"
 import Feed from "./components/Feed"
 import ErrorPage from "./components/ErrorPage"
-import Connections from "./components/Connection Related/Connections"
-import Requests from "./components/Connection Related/requests"
+import Connections from "./components/Connection Related/Connections.jsx"
+import Requests from "./components/Connection Related/Requests"
 
 function App() {
 

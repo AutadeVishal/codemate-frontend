@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/constants';
 import { setUser } from '../../utils/userSlice';
-import FeedCard from '../feedCard';
+import FeedCard from '../FeedCard';
 
 const Profile = () => {
   const userInfo = useSelector(state => state.user);
