@@ -32,7 +32,6 @@ const Profile = () => {
       const updatedUserInfoPayload = {
         firstName: firstNameState,
         lastName: lastNameState,
-        // use the parsed array from the input string
         skills: skillsInput
           ? skillsInput.split(',').map(s => s.trim()).filter(Boolean)
           : [],
@@ -58,7 +57,6 @@ const Profile = () => {
       setIsChangingPassword(false);
       setNewPassword('');
       setConfirmPassword('');
-      // sync skills state after successful update
       setSkillsState(res.data.data?.skills || []);
       setSkillsInput((res.data.data?.skills || []).join(', '));
     } catch (err) {
@@ -89,7 +87,7 @@ const Profile = () => {
             type="email"
             value={emailState}
             onChange={(e) => setEmailState(e.target.value)}
-            className="input input-bordered bg-white/10 border-white/20 text-white placeholder-white/60"
+            className="rounded-full px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none"
             placeholder="you@example.com"
           />
 
@@ -108,7 +106,7 @@ const Profile = () => {
                   type="password" 
                   value={newPassword} 
                   onChange={(e) => setNewPassword(e.target.value)} 
-                  className="input input-bordered bg-white/10 border-white/20 text-white placeholder-white/60" 
+                  className="rounded-full px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none" 
                   placeholder="Enter new password"
                 />
 
@@ -117,7 +115,7 @@ const Profile = () => {
                   type="password" 
                   value={confirmPassword} 
                   onChange={(e) => setConfirmPassword(e.target.value)} 
-                  className="input input-bordered bg-white/10 border-white/20 text-white placeholder-white/60" 
+                  className="rounded-full px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none" 
                   placeholder="Confirm new password"
                 />
               </div>
@@ -129,7 +127,7 @@ const Profile = () => {
             type="text"
             value={firstNameState}
             onChange={(e) => setFirstNameState(e.target.value)}
-            className="input input-bordered bg-white/10 border-white/20 text-white placeholder-white/60"
+            className="rounded-full px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none"
             placeholder="First name"
           />
 
@@ -138,7 +136,7 @@ const Profile = () => {
             type="text"
             value={lastNameState}
             onChange={(e) => setLastNameState(e.target.value)}
-            className="input input-bordered bg-white/10 border-white/20 text-white placeholder-white/60"
+            className="rounded-full px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none"
             placeholder="Last name"
           />
 
@@ -151,7 +149,7 @@ const Profile = () => {
               setSkillsInput(val);
               setSkillsState(val.split(',').map(s => s.trim()).filter(Boolean));
             }}
-            className="input input-bordered bg-white/10 border-white/20 text-white placeholder-white/60"
+            className="rounded-full px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none"
             placeholder="e.g., React, Node.js, MongoDB"
           />
 
@@ -160,7 +158,7 @@ const Profile = () => {
             type="text"
             value={photoURLState}
             onChange={(e) => setPhotoURLState(e.target.value)}
-            className="input input-bordered bg-white/10 border-white/20 text-white placeholder-white/60"
+            className="rounded-full px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none"
             placeholder="https://..."
           />
 
@@ -168,12 +166,15 @@ const Profile = () => {
           <textarea
             value={aboutState}
             onChange={(e) => setAboutState(e.target.value)}
-            className="textarea textarea-bordered bg-white/10 border-white/20 text-white placeholder-white/60"
+            className="rounded-2xl px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none"
             rows="3"
             placeholder="A short bio..."
           ></textarea>
 
-          <button className="mt-4 px-4 py-2 rounded-full bg-white/15 text-white hover:bg-white/25" onClick={updateData}>
+          <button 
+            className="mt-4 px-4 py-2 rounded-full bg-white/15 text-white hover:bg-white/25 transition"
+            onClick={updateData}
+          >
             Update Profile
           </button>
         </fieldset>

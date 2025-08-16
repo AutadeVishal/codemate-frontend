@@ -8,6 +8,7 @@ import Feed from "./components/Feed"
 import ErrorPage from "./components/ErrorPage"
 import Connections from "./components/Connection Related/Connections.jsx"
 import Requests from "./components/Connection Related/Requests"
+import Chat from "./components/Chat.jsx"
 
 
 
@@ -23,8 +24,10 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/error" element={<ErrorPage />} />
-               <Route path="/connections" element={<Connections />} />
-                <Route path="/requests" element={<Requests />} />
+              <Route path="/connections" element={<Connections />} />
+              <Route path="/requests" element={<Requests />} />
+              <Route path="/chat/:toUserId" element={<Chat />} />
+
               <Route path="*" element={<ErrorPage />} /> {/* Catch-all route for 404 */}
             </Route>
           </Routes>
@@ -33,5 +36,5 @@ function App() {
 
     </>
   )
-} 
+}
 export default App

@@ -43,7 +43,10 @@ const Connections = () => {
           lastName={user.lastName}
           skills={user.skills}
           about={user.about}
-          photoURL={user}
+          photoURL={user.photoURL}
+          _id={user._id}
+          age={user.age}
+          gender={user.gender}
         />
       ))}
     </div>
