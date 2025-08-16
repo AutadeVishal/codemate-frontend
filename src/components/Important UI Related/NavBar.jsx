@@ -4,6 +4,8 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import { removeUser } from "../../utils/userSlice";
 import { useEffect } from "react";
+import { removeConnections } from "../../utils/connectionSlice";
+import { removeFeed } from "../../utils/feedSlice";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,9 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       await axios.post(`${BASE_URL}/auth/logout`, {}, { withCredentials: true });
+      dispatch(removeUser());
+      dispatch(removeConnections());
+      dispatch(removeFeed());
       dispatch(removeUser());
       navigate("/login");
     } catch (err) {

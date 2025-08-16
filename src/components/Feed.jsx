@@ -26,12 +26,12 @@ const Feed = () => {
   }
 
   useEffect(() => {
-    if (feedData?.length === 0) getFeedData();
+    if (feedData==null || feedData?.length == 0) getFeedData();
 
   }, []);
   return (
     <div className='flex flex-wrap gap-8 px-10 mt-10 justify-center items-center'>
-      {feedData.map((userData) => (
+      { feedData.map((userData) => (
         <FeedCard key={userData._id} userInfo={userData} />
       ))}
     </div>
