@@ -1,23 +1,27 @@
-import { useState } from 'react'
-import LoginForm from './LoginForm'
-import RegisterForm from './RegisterForm';
+import { useState } from "react";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+
 const Login = () => {
+  const [isLoginMode, setIsLoginMode] = useState(true);
 
-  const [isLogin,setIsLogin]=useState(true);
+  const toggleMode = () => setIsLoginMode((prev) => !prev);
 
+  return (
+    <section className="max-w-md mx-auto mt-12 px-4">
+      <p className="mb-6 text-center text-sm text-white/70">
+        {isLoginMode ? "New here? " : "Already a user? "}
+        <button
+          onClick={toggleMode}
+          className="text-blue-400 hover:underline font-medium"
+        >
+          {isLoginMode ? "Register" : "Login"}
+        </button>
+      </p>
 
+      {isLoginMode ? <LoginForm /> : <RegisterForm />}
+    </section>
+  );
+};
 
-
-  return (<div>
-
-    {isLogin ? <LoginForm /> : <RegisterForm />}
-    <button
-      className="w-full mt-5 rounded-full bg-white/15 text-white hover:bg-white/25 px-4 py-2 transition"
-      onClick={()=>setIsLogin(!isLogin)}
-    >
-      {isLogin ? "New Here ? Register ":"Already a User ? Login"}    </button>
-  </div>
-  )
-}
-
-export default Login
+export default Login;
