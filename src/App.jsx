@@ -26,7 +26,7 @@ function App() {
               <Route path="/error" element={<ErrorPage />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
-              <Route path="/chat/:toUserId" element={<Chat />} />
+              <Route path="/chat/:targetUserId" element={<Chat />} />
 
               <Route path="*" element={<ErrorPage />} /> {/* Catch-all route for 404 */}
             </Route>
